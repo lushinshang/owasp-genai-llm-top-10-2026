@@ -4,6 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>票選第一的風險，為什麼在真實事件裡消失了？——OWASP Top 10 for LLM Applications 2026 深度導讀</title>
+<meta name="description" content="OWASP GenAI Security Project 首度拿 7,714 起真實事件核對十年來的社群票選榜單，揭露票選第一名 Prompt Injection 在事件記錄裡竟排不進前十。深度導讀十大風險排名變化、三層同心圓攻擊面模型、與框架家族全貌。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="票選第一的風險，為什麼在真實事件裡消失了？——OWASP LLM Top 10 2026 深度導讀">
+<meta property="og:description" content="OWASP GenAI Security Project 首度拿 7,714 起真實事件核對十年來的社群票選榜單，揭露票選第一名 Prompt Injection 在事件記錄裡竟排不進前十。">
+<meta property="og:image" content="https://lushinshang.github.io/owasp-genai-llm-top-10-2026/images/summary.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="900">
+<meta property="og:url" content="https://lushinshang.github.io/owasp-genai-llm-top-10-2026/">
+<meta property="og:site_name" content="OWASP LLM Top 10 2026 深度導讀">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="票選第一的風險，為什麼在真實事件裡消失了？——OWASP LLM Top 10 2026 深度導讀">
+<meta name="twitter:description" content="OWASP GenAI Security Project 首度拿 7,714 起真實事件核對十年來的社群票選榜單，揭露票選第一名 Prompt Injection 在事件記錄裡竟排不進前十。">
+<meta name="twitter:image" content="https://lushinshang.github.io/owasp-genai-llm-top-10-2026/images/summary.png">
 <style>
   :root{
     --bg:#f9f7f4;
@@ -74,6 +87,15 @@
   nav.toc a:hover{color:var(--accent); border-bottom-color:var(--accent);}
   main{padding:46px 20px 20px;}
   article{max-width:720px;margin:0 auto;}
+  article ul{
+    margin:0 0 22px;
+    padding-left:22px;
+  }
+  article li{
+    font-size:16.5px;
+    line-height:1.62;
+    margin:0 0 10px;
+  }
   article p{
     font-size:16.5px;
     line-height:1.68;
@@ -123,6 +145,20 @@
   @media (max-width:640px){
     figure.section-figure img{aspect-ratio:9/16;}
   }
+  figure.summary-figure{margin:0; padding:28px 24px 8px; background:#0e1a2b;}
+  figure.summary-figure img{
+    width:100%; max-width:640px; display:block; margin:0 auto;
+    border-radius:12px; aspect-ratio:16/9; object-fit:cover;
+    box-shadow:0 6px 24px rgba(0,0,0,0.28);
+    cursor:zoom-in;
+  }
+  figure.summary-figure figcaption{
+    max-width:640px; margin:10px auto 0; text-align:center;
+    font-size:12.5px; color:#b9c6d6; padding-bottom:8px;
+  }
+  @media (max-width:640px){
+    figure.summary-figure img{aspect-ratio:9/16; max-width:360px;}
+  }
   footer a{color:var(--accent);}
   footer{
     max-width:720px;margin:0 auto;
@@ -168,6 +204,14 @@
 </head>
 <body>
 
+<figure class="summary-figure">
+  <picture>
+    <source media="(max-width: 640px)" srcset="images/summary-mobile.png">
+    <img src="images/summary.png" alt="OWASP LLM Top 10 2026 深度導讀全篇導覽圖：票選vs證據、三層同心圓、排名遷移、治理視角、框架家族五大重點" loading="eager">
+  </picture>
+  <figcaption>一圖看懂全文五大重點</figcaption>
+</figure>
+
 <header class="hero">
   <div class="inner">
     <div class="kicker">OWASP Top 10 for LLM Applications 2026 · 深度導讀</div>
@@ -186,6 +230,8 @@
     <a href="#output">輸出端</a>
     <a href="#scope">清單邊界</a>
     <a href="#governance">治理視角</a>
+    <a href="#version">版本演進</a>
+    <a href="#family">框架家族</a>
   </div>
 </nav>
 
@@ -260,6 +306,38 @@
 
 <p>Unbounded Consumption 的躍升則是另一個訊號：財務控管——硬性支出上限、按 token 計價的配額——第一次被明確寫進資安風險清單，而不只是雲端成本管理的範疇。對負責交付 MSSP 服務的團隊來說，這代表監控指標要多一項：不是只看有沒有被攻破，還要看帳單有沒有被榨乾。</p>
 
+<h2 id="version">官方版本的演進：從哪裡改到哪裡</h2>
+
+<p>文件開頭的 Revision History 只留下四個日期，沒有附上逐版異動說明——v1.0（2023-08-01）、v1.1（2023-10-16）、2025 Release（2024-11-18）、2026 Release（2026-08-04）——中間三次改版具體改了什麼，OWASP 沒有寫進這份文件，也沒有其他官方紀錄可查證，這裡不編。能確認、也最關鍵的是 2025 到 2026 這一次：</p>
+
+<ul>
+<li><strong>方法論翻新</strong>：2025 版純靠社群票選；2026 版第一次拿真實事件資料庫核對票選結果，讓證據能小幅撼動排名</li>
+<li><strong>排名重排</strong>：Excessive Agency 從第六名衝上第三名，漲最多；Improper Output Handling 從第五名摔到第十名，跌最多</li>
+<li><strong>改名並擴大範圍</strong>：System Prompt Leakage 更名為 Hidden Context Exposure，涵蓋範圍從「系統提示外洩」擴大成「任何隱藏上下文的洩漏或還原」</li>
+<li><strong>既有條目吸收新手法，條目總數維持十條不變</strong>：Prompt Injection 納入跨模態攻擊、Supply Chain 納入被冒充的模型 artifact、Data and Model Poisoning 納入微調破壞、Improper Output Handling 納入大規模生成的不安全程式碼</li>
+<li><strong>附錄結構改版</strong>：框架對照從「每個條目各自附註」，改成集中成一個獨立附錄，並明確標註每個引用框架的版本號——文件稱之為「version-pinned reference」，往後外部框架更新，不會讓這份文件的內容跟著漂移</li>
+<li><strong>框架家族擴張</strong>：2025 版發布時，Agentic Top 10（ASI）與 GenAI Data Security（DSGAI）都還沒問世，2026 版是第一個能明確跟這兩個姊妹框架切割範圍的版本</li>
+</ul>
+
+<h2 id="family">框架家族：這份清單不是一個人在戰鬥</h2>
+
+<p>OWASP GenAI Security Project 現在維護的，其實是一整個框架家族，LLM Top 10 只是其中一支。文件末頁的 Framework Sources &amp; Versions（Appendix A）列出完整版本對照。</p>
+
+<p><strong>OWASP 自家的清單與評分系統：</strong></p>
+
+<ul>
+<li><strong>LLM Top 10</strong>（本文件，2026）：模型「作為應用程式裡的一個元件」時的十大風險</li>
+<li><strong>Agentic Top 10（ASI）</strong>（2026，2025-12-09 公告）：模型「變成會自主行動的角色」——擁有工具、跨 session 記憶、能觸發後果——之後的風險，是 LLM Top 10 的姊妹清單，兩者刻意切割不重疊</li>
+<li><strong>GenAI Data Security（DSGAI）</strong>（v1.0，2026-03-17）：專攻資料安全角度，切得比 LLM Top 10 細很多（DSGAI01 到 DSGAI21 以上），例如「過寬的上下文視窗」「瀏覽器／端點助理越權」這類更具體的子風險</li>
+<li><strong>AIVSS（AI Vulnerability Scoring System）</strong>（v0.8，尚未到 1.0）：幫上述風險打嚴重度分數，定位類似傳統資安的 CVSS，但專門給 agentic AI 風險用</li>
+</ul>
+
+<p>這四個是一家人，分工明確：LLM Top 10 定義「有哪些風險」，Agentic Top 10、DSGAI、AIVSS 分別沿著「行動力」「資料面」「嚴重度量化」三個維度往下細分。</p>
+
+<p><strong>外部引用的獨立框架</strong>，不是 OWASP 自家出品，只是拿來對照映射：MITRE ATLAS（content v2026.06）、MITRE ATT&amp;CK（v19.1）、MITRE CWE（4.20）、NIST AI 600-1（v1.0，2024-07）、NIST AI RMF（v1.0，2023）、CSA AI Controls Matrix（v1.1，2026-06-22）。</p>
+
+<p>簡單說，LLM Top 10 負責定義風險本身，OWASP 自家其他三份清單負責把風險往「行動力／資料面／嚴重度」延伸細分，外部這六個框架則是溝通用的橋樑——當企業要跟稽核單位、政府法規、或既有資安架構對接時，直接查附錄就知道 LLM01 對應到 MITRE ATT&amp;CK 或 NIST AI RMF 的哪一項，不必自己重新翻譯一次。</p>
+
 <h2>收尾</h2>
 
 <p>這份清單最誠實的地方，是它承認了自己過去的侷限——十年來只靠專家投票，直到今年才第一次拿真實事件去檢驗信念。檢驗的結果沒有推翻投票，但揭露了幾個投票會系統性看走眼的角落：防禦太有效反而讓統計低估風險，傷害太安靜反而讓風險被低估。這提醒的與其說是「該更相信哪份清單」，不如說是一件更基本的事：任何靠人類直覺排出來的優先順序，都值得偶爾找真實資料驗一驗，尤其是在一個攻防雙方都還在摸索邊界的新戰場上。</p>
@@ -286,7 +364,7 @@
       lightbox.classList.add("is-open");
     }
     function closeLightbox(){ lightbox.classList.remove("is-open"); lightboxImg.src = ""; }
-    document.querySelectorAll("figure.section-figure img").forEach(function(img){
+    document.querySelectorAll("figure.section-figure img, figure.summary-figure img").forEach(function(img){
       img.addEventListener("click", function(){ openLightbox(img); });
     });
     lightbox.addEventListener("click", closeLightbox);
