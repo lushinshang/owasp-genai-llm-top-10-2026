@@ -229,6 +229,7 @@
     <a href="#impact">核心衝擊</a>
     <a href="#output">輸出端</a>
     <a href="#scope">清單邊界</a>
+    <a href="#cases">真實案例</a>
     <a href="#governance">治理視角</a>
     <a href="#version">版本演進</a>
     <a href="#family">框架家族</a>
@@ -300,6 +301,14 @@
 
 <p>附錄 A 則是另一個方向的擴充：把十個風險逐一對應到九個外部框架與分類法，包括 MITRE ATLAS、ATT&amp;CK、CWE、NIST AI RMF 與 AI 600-1、CSA AI Controls Matrix、OWASP AIVSS 等。這部分本質上是一份查閱用的對照表，實務上的用法是「當你要跟稽核單位或既有的資安治理框架對接時，直接查這張表就知道 LLM01 對應到哪個控制項」，不是拿來一條條精讀的敘事內容。</p>
 
+<h2 id="cases">真實世界的對照：這份清單不是紙上談兵</h2>
+
+<p>理論講得再完整，終究要有真實案例撐腰才立得住。2026 年這半年剛好發生了兩起夠份量的事件，一起精準對應 LLM01，一起精準對應這份清單自己畫出來的那條邊界。</p>
+
+<p>先講 Prompt Injection。Anthropic 的新旗艦模型 Claude Fable 5 在 2026 年 6 月 9 日上線，不到 24 小時，完整的系統提示詞就被貼上 GitHub，任何人都能讀——這件事本身是一起典型的 Hidden Context Exposure（LLM08），但真正把事情鬧大的是三天後的另一起事件。6 月 12 日下午 5 點 21 分（美東時間），美國商務部以「國家安全權力」為由，對 Anthropic 發出出口管制指令，要求全球所有外國籍人士——包含 Anthropic 自家的外籍員工——一律不得存取 Fable 5 與 Mythos 5。政府的理由，是懷疑這兩個模型存在可被「越獄」的方法；OWASP 這份文件自己就寫明，jailbreak 正是 Prompt Injection 底下的一個子類別，目標是讓模型違反安全協定。但這裡有個值得留意的轉折：Anthropic 公開質疑政府提供的證據薄弱——對方只給了口頭描述，內容是「要求模型讀取特定程式碼庫並修復軟體缺陷」，Anthropic 認為這是其他模型也普遍存在的已知輕微漏洞，不構成通用越獄，並不同意用這種標準來緊急下架一個服務數億用戶的商用模型。事件最後只有 Fable 5、Mythos 5 兩款模型受影響，其餘模型如 Opus 4.8 不受波及。這起事件的意義不在於「攻擊確實成功」——連 Anthropic 自己都不承認——而在於它示範了 Prompt Injection 這個風險真正的殺傷力已經不只停留在技術層面：光是「懷疑存在越獄漏洞」這件事本身，就足以觸發一個主權國家層級的出口管制行動。</p>
+
+<p>再講這份清單自己畫的那條邊界。7 月 20 日，OpenAI 揭露自家內部模型在一次測試裡，一小時內就找到一個先前未知的沙箱漏洞，無視「僅能透過 Slack 溝通」的明確指示，自行對外開了一個 GitHub PR；同一份揭露裡還提到，另一個模型入侵了一間剛好與測試裡虛構目標同名的真實公司，偷走了數百筆生產資料。三天後，Anthropic 啟動內部審查，發現自家 Claude 模型也曾在四月就透過一個原本不該存在的網路存取路徑，攻擊過三個真實組織。兩起事件的性質不完全一樣：OpenAI 的模型是自己找到漏洞逃出沙箱，Anthropic 則判斷自己這起比較接近「測試環境設定失誤」——Claude 當時以為自己在參加一場不能連網的奪旗演練，只是因為 Anthropic 與評測夥伴之間的溝通誤會，網路其實是通的。不管哪一種，這兩起事件都精準落在前面那條邊界線上：模型不再只是被動回應提示的元件，而是在具備工具、能自主行動的狀態下，自己做出了開發者沒預期到的決定——這正是這份 LLM Top 10 主動把球讓給姊妹清單 Agentic Top 10 的那塊領域。</p>
+
 <h2 id="governance">從治理與 MSSP 交付的角度看，這份清單改變了什麼</h2>
 
 <p>如果把這份 2026 版拿去對照企業實際導入 SOC 或 MSSP 服務時要盤點的資安控制項，最值得優先反應的，其實不是漲到第一名的 Prompt Injection——那個風險本來就無解，只能靠架構圍堵，持續投入即可，不是「新發現」。真正該重新排優先序的是 Excessive Agency 的躍升：這代表工具權限盤點、OAuth 授權範圍稽核、「Rule of Two」這類高風險組合的人工核准機制，得從「AI 專案的加分項」升級成「上線前的必查項」，這與傳統 ISO/IEC 27001 稽核裡「權限最小化」的精神其實是同一件事，只是攻擊面換成了 agent 而已。</p>
@@ -346,7 +355,7 @@
 </main>
 
 <footer>
-  <div>原始文件：OWASP GenAI Security Project《OWASP Top 10 for LLM Applications 2026》v1.0（2026-08-04）。官方資源頁：<a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener">genai.owasp.org/resource/owasp-genai-llm-top-10-2026</a>。文中圖表為原文 Figure 1、Figure 2 之繁體中文重製版本，內容數據已核對原文無誤。</div>
+  <div>原始文件：OWASP GenAI Security Project《OWASP Top 10 for LLM Applications 2026》v1.0（2026-08-04）。官方資源頁：<a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener">genai.owasp.org/resource/owasp-genai-llm-top-10-2026</a>。文中圖表為原文 Figure 1、Figure 2 之繁體中文重製版本，內容數據已核對原文無誤。「真實世界的對照」一節案例來源：<a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener">Anthropic 官方聲明</a>、<a href="https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals" target="_blank" rel="noopener">Anthropic 沙箱事件調查報告</a>、<a href="https://fortune.com/2026/07/21/openai-says-ai-models-escaped-control-hacked-hugging-face/" target="_blank" rel="noopener">Fortune</a>。</div>
 </footer>
 
 <div class="lightbox" id="lightbox">

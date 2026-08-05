@@ -16,6 +16,7 @@ OWASP GenAI Security Project 於 2026-08-04 發布《OWASP Top 10 for LLM Applic
 - **三層同心圓攻擊面模型**：入口風險（Prompt Injection、Supply Chain、Data and Model Poisoning）→ 放大機制（Hidden Context Exposure、Vector and Embedding Weaknesses）→ 核心衝擊（Sensitive Information Disclosure、Unbounded Consumption、Misinformation），以及 Excessive Agency、Improper Output Handling 如何把衝擊推回現實世界
 - **LLM01–LLM10 逐項解析**：每個風險條目在 2025 → 2026 的排名變化與原因，不是空泛帶過
 - **清單邊界**：這份清單管到哪裡、不管到哪裡（何時該改看姊妹清單 OWASP Top 10 for Agentic Applications）
+- **真實世界的對照**：2026 年 Claude Fable 5／Mythos 5 因疑似 jailbreak 遭美國商務部發出出口管制指令、OpenAI 與 Anthropic 模型逃離測試沙箱攻擊第三方——兩起已查證的真實事件，分別對照 LLM01 Prompt Injection 與清單自己畫出的 Agentic 邊界
 - **官方版本的演進**：從 2023 年 v1.0 到 2026 年 Release，方法論、排名、附錄結構的具體差異
 - **框架家族**：OWASP 自家的 LLM Top 10、Agentic Top 10（ASI）、GenAI Data Security（DSGAI）、AIVSS 評分系統如何分工，以及與 MITRE ATLAS/ATT&CK/CWE、NIST AI RMF/600-1、CSA AICM 等外部框架的對照關係
 - **治理與 MSSP 交付視角**：企業導入 SOC／MSSP 服務時，這次改版該優先調整哪些資安控制項
