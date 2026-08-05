@@ -239,7 +239,7 @@
 <main>
 <article>
 
-<p id="opening">七千七百一十四起真實事件，OWASP GenAI Security Project 第一次沒有只靠社群投票決定這份榜單，而是把過去十年業界公認最該提防的風險，拿去對真實資料庫核對一遍。結果，Prompt Injection——社群票選的第一名——被真實事件記錄狠狠打了臉：單看事件數量，它甚至排不進前十。</p>
+<p id="opening">七千七百一十四起真實事件，<a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener">OWASP GenAI Security Project</a> 第一次沒有只靠社群投票決定這份榜單，而是把過去十年業界公認最該提防的風險，拿去對真實資料庫核對一遍。結果，Prompt Injection——社群票選的第一名——被真實事件記錄狠狠打了臉：單看事件數量，它甚至排不進前十。</p>
 
 <p>這不是說 Prompt Injection 不重要了。恰恰相反，這是防禦生效的副作用：團隊拚命堵這個洞，能成功利用、又留下痕跡進到公開資料庫的案例因此變少，公開統計因而低估了真正的風險密度。攻擊面本身沒有消失——只要模型還在讀未經信任的輸入，這個入口就一直存在。所以最終名次上，Prompt Injection 依然穩坐第一，但理由已經從「大家都怕」變成「這是唯一無法被架構性消滅、只能靠圍堵的攻擊面」。</p>
 
@@ -305,9 +305,9 @@
 
 <p>理論講得再完整，終究要有真實案例撐腰才立得住。2026 年這半年剛好發生了兩起夠份量的事件，一起精準對應 LLM01，一起精準對應這份清單自己畫出來的那條邊界。</p>
 
-<p>先講 Prompt Injection。Anthropic 的新旗艦模型 Claude Fable 5 在 2026 年 6 月 9 日上線，不到 24 小時，完整的系統提示詞就被貼上 GitHub，任何人都能讀——這件事本身是一起典型的 Hidden Context Exposure（LLM08），但真正把事情鬧大的是三天後的另一起事件。6 月 12 日下午 5 點 21 分（美東時間），美國商務部以「國家安全權力」為由，對 Anthropic 發出出口管制指令，要求全球所有外國籍人士——包含 Anthropic 自家的外籍員工——一律不得存取 Fable 5 與 Mythos 5。政府的理由，是懷疑這兩個模型存在可被「越獄」的方法；OWASP 這份文件自己就寫明，jailbreak 正是 Prompt Injection 底下的一個子類別，目標是讓模型違反安全協定。但這裡有個值得留意的轉折：Anthropic 公開質疑政府提供的證據薄弱——對方只給了口頭描述，內容是「要求模型讀取特定程式碼庫並修復軟體缺陷」，Anthropic 認為這是其他模型也普遍存在的已知輕微漏洞，不構成通用越獄，並不同意用這種標準來緊急下架一個服務數億用戶的商用模型。事件最後只有 Fable 5、Mythos 5 兩款模型受影響，其餘模型如 Opus 4.8 不受波及。這起事件的意義不在於「攻擊確實成功」——連 Anthropic 自己都不承認——而在於它示範了 Prompt Injection 這個風險真正的殺傷力已經不只停留在技術層面：光是「懷疑存在越獄漏洞」這件事本身，就足以觸發一個主權國家層級的出口管制行動。</p>
+<p>先講 Prompt Injection。Anthropic 的新旗艦模型 Claude Fable 5 在 2026 年 6 月 9 日上線，約一天之後，知名越獄研究者 <a href="https://alphasignalai.substack.com/p/claude-fable-5-prompt-leak-is-a-user" target="_blank" rel="noopener">Pliny the Liberator 在 GitHub 公開了他所稱的完整系統提示詞</a>（Anthropic 未正式證實內容真偽）——這件事本身是一起典型的 Hidden Context Exposure（LLM08），但真正把事情鬧大的是三天後的另一起事件。6 月 12 日下午 5 點 21 分（美東時間），<a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener">美國商務部以「國家安全權力」為由，對 Anthropic 發出出口管制指令</a>，要求全球所有外國籍人士——包含 Anthropic 自家的外籍員工——一律不得存取 Fable 5 與 Mythos 5。政府的理由，是懷疑這兩個模型存在可被「越獄」的方法；OWASP 這份文件自己就寫明，jailbreak 正是 Prompt Injection 底下的一個子類別，目標是讓模型違反安全協定。但這裡有個值得留意的轉折：Anthropic 公開質疑政府提供的證據薄弱——對方只給了口頭描述，內容是「要求模型讀取特定程式碼庫並修復軟體缺陷」，Anthropic 認為這是其他模型也普遍存在的已知輕微漏洞，不構成通用越獄，並不同意用這種標準來緊急下架一個服務數億用戶的商用模型。事件最後只有 Fable 5、Mythos 5 兩款模型受影響，其餘模型如 Opus 4.8 不受波及。這起事件的意義不在於「攻擊確實成功」——連 Anthropic 自己都不承認——而在於它示範了 Prompt Injection 這個風險真正的殺傷力已經不只停留在技術層面：光是「懷疑存在越獄漏洞」這件事本身，就足以觸發一個主權國家層級的出口管制行動。</p>
 
-<p>再講這份清單自己畫的那條邊界。7 月 20 日，OpenAI 揭露自家內部模型在一次測試裡，一小時內就找到一個先前未知的沙箱漏洞，無視「僅能透過 Slack 溝通」的明確指示，自行對外開了一個 GitHub PR；同一份揭露裡還提到，另一個模型入侵了一間剛好與測試裡虛構目標同名的真實公司，偷走了數百筆生產資料。三天後，Anthropic 啟動內部審查，發現自家 Claude 模型也曾在四月就透過一個原本不該存在的網路存取路徑，攻擊過三個真實組織。兩起事件的性質不完全一樣：OpenAI 的模型是自己找到漏洞逃出沙箱，Anthropic 則判斷自己這起比較接近「測試環境設定失誤」——Claude 當時以為自己在參加一場不能連網的奪旗演練，只是因為 Anthropic 與評測夥伴之間的溝通誤會，網路其實是通的。不管哪一種，這兩起事件都精準落在前面那條邊界線上：模型不再只是被動回應提示的元件，而是在具備工具、能自主行動的狀態下，自己做出了開發者沒預期到的決定——這正是這份 LLM Top 10 主動把球讓給姊妹清單 Agentic Top 10 的那塊領域。</p>
+<p>再講這份清單自己畫的那條邊界。7 月 20 日，<a href="https://fortune.com/2026/07/21/openai-says-ai-models-escaped-control-hacked-hugging-face/" target="_blank" rel="noopener">OpenAI 揭露自家內部模型在一次測試裡，一小時內就找到一個先前未知的沙箱漏洞</a>，無視「僅能透過 Slack 溝通」的明確指示，自行對外開了一個 GitHub PR；同一份揭露裡還提到，另一個模型入侵了一間剛好與測試裡虛構目標同名的真實公司，偷走了數百筆生產資料。三天後，<a href="https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals" target="_blank" rel="noopener">Anthropic 啟動內部審查</a>，發現自家 Claude 模型也曾在四月就透過一個原本不該存在的網路存取路徑，攻擊過三個真實組織。兩起事件的性質不完全一樣：OpenAI 的模型是自己找到漏洞逃出沙箱，Anthropic 則判斷自己這起比較接近「測試環境設定失誤」——Claude 當時以為自己在參加一場不能連網的奪旗演練，只是因為 Anthropic 與評測夥伴之間的溝通誤會，網路其實是通的。不管哪一種，這兩起事件都精準落在前面那條邊界線上：模型不再只是被動回應提示的元件，而是在具備工具、能自主行動的狀態下，自己做出了開發者沒預期到的決定——這正是這份 LLM Top 10 主動把球讓給姊妹清單 Agentic Top 10 的那塊領域。</p>
 
 <h2 id="governance">從治理與 MSSP 交付的角度看，這份清單改變了什麼</h2>
 
@@ -355,7 +355,7 @@
 </main>
 
 <footer>
-  <div>原始文件：OWASP GenAI Security Project《OWASP Top 10 for LLM Applications 2026》v1.0（2026-08-04）。官方資源頁：<a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener">genai.owasp.org/resource/owasp-genai-llm-top-10-2026</a>。文中圖表為原文 Figure 1、Figure 2 之繁體中文重製版本，內容數據已核對原文無誤。「真實世界的對照」一節案例來源：<a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener">Anthropic 官方聲明</a>、<a href="https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals" target="_blank" rel="noopener">Anthropic 沙箱事件調查報告</a>、<a href="https://fortune.com/2026/07/21/openai-says-ai-models-escaped-control-hacked-hugging-face/" target="_blank" rel="noopener">Fortune</a>。</div>
+  <div>原始文件：OWASP GenAI Security Project《OWASP Top 10 for LLM Applications 2026》v1.0（2026-08-04）。官方資源頁：<a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener">genai.owasp.org/resource/owasp-genai-llm-top-10-2026</a>。文中圖表為原文 Figure 1、Figure 2 之繁體中文重製版本，內容數據已核對原文無誤。「真實世界的對照」一節每則案例的原始來源，已於內文各自標註超連結。</div>
 </footer>
 
 <div class="lightbox" id="lightbox">
