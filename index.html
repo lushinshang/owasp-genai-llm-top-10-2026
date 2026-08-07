@@ -233,6 +233,7 @@
     <a href="#governance">治理視角</a>
     <a href="#version">版本演進</a>
     <a href="#family">框架家族</a>
+    <a href="#reactions">業界迴響</a>
   </div>
 </nav>
 
@@ -347,6 +348,24 @@
 
 <p>簡單說，LLM Top 10 負責定義風險本身，OWASP 自家其他三份清單負責把風險往「行動力／資料面／嚴重度」延伸細分，外部這六個框架則是溝通用的橋樑——當企業要跟稽核單位、政府法規、或既有資安架構對接時，直接查附錄就知道 LLM01 對應到 MITRE ATT&amp;CK 或 NIST AI RMF 的哪一項，不必自己重新翻譯一次。</p>
 
+<h2 id="reactions">公布後迴響：業界怎麼看</h2>
+
+<p>這份文件是 2026 年 8 月 3 日在美國拉斯維加斯的 Black Hat USA 資安大會週期間發布的，時機本身就帶了聲量。發布後幾天，主流資安媒體陸續跟進報導，但多數停留在轉述官方內容的層級；截至目前，真正提出獨立觀點的是兩篇資安公司的技術部落格。</p>
+
+<figure class="section-figure">
+  <picture>
+    <source media="(max-width: 640px)" srcset="images/reactions-mobile.png">
+    <img src="images/reactions.png" alt="OWASP LLM Top 10 2026 發布後的業界迴響：Invicti Security 與 AltaySec 兩篇獨立評論重點對照" loading="lazy">
+  </picture>
+  <figcaption>目前兩篇具獨立觀點的評論，皆來自中小型專業資安公司的技術部落格</figcaption>
+</figure>
+
+<p>美國 AppSec 廠商 <a href="https://www.invicti.com/blog/web-security/owasp-llm-top-10-2026-whats-new" target="_blank" rel="noopener">Invicti Security 的 Zbigniew Banach 寫了一篇分析</a>，核心論點是：票選與事件數據的落差不是問題，而是「防禦盲點」的訊號——Prompt Injection 事件記錄少代表防禦生效，Misinformation 事件記錄多但票選低則代表資安圈的認知還停留在舊的 LLM 使用方式，沒跟上目前 agentic 部署的實際風險現況。他自己編了一個情境案例：開發者助手在程式碼庫裡生成一張假的漏洞 ticket，值班工程師白白花三小時去查一個根本不存在的問題，用來具體演示「錯誤答案變成錯誤行動」這條因果鏈。他給讀者的建議也很具體：同時收藏 LLM Top 10 與 Agentic Top 10 兩份文件，因為「模型作為元件」跟「模型作為行動者」是兩種不同的責任歸屬。</p>
+
+<p>土耳其的 AI 資安研究公司 <a href="https://altaysec.com.tr/en/arastirmalar/owasp-llm-top10-2026-how-it-was-ranked" target="_blank" rel="noopener">AltaySec，研究員 Fevzi Ege Yurtsevenler</a> 則從另一個角度切入，自己提出「防禦效應」（defense effect）這個命名概念，解釋為什麼高度被防禦的風險反而會在公開事件記錄裡顯得次數偏低。他做了一張信念與證據落差的對比表，涵蓋從完全一致到落差最大的幾個條目，並給出一條反直覺的提醒：公開 CVE 記錄的安靜，可能代表防禦有效，不代表風險真的消失，所以不該只因為公開事件數字低，就把既有的控制措施降級。</p>
+
+<p>這兩篇的共同點，是都認同這次改版最大的價值不在排名本身，而在於它逼著讀者去正視「大家以為的風險」和「真實發生的風險」之間的落差——這也是這份導讀開頭第一段想講的事。目前（8 月 7 日）還沒有看到一線資安大廠（如 Palo Alto Networks、CrowdStrike）或知名 KOL 公開表態，國內外主要停留在中小型專業資安公司的技術部落格層級，值得再觀察一到兩週，看後續是否有更大聲量的評論出現。</p>
+
 <h2>收尾</h2>
 
 <p>這份清單最誠實的地方，是它承認了自己過去的侷限——十年來只靠專家投票，直到今年才第一次拿真實事件去檢驗信念。檢驗的結果沒有推翻投票，但揭露了幾個投票會系統性看走眼的角落：防禦太有效反而讓統計低估風險，傷害太安靜反而讓風險被低估。這提醒的與其說是「該更相信哪份清單」，不如說是一件更基本的事：任何靠人類直覺排出來的優先順序，都值得偶爾找真實資料驗一驗，尤其是在一個攻防雙方都還在摸索邊界的新戰場上。</p>
@@ -355,7 +374,7 @@
 </main>
 
 <footer>
-  <div>原始文件：OWASP GenAI Security Project《OWASP Top 10 for LLM Applications 2026》v1.0（2026-08-04）。官方資源頁：<a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener">genai.owasp.org/resource/owasp-genai-llm-top-10-2026</a>。文中圖表為原文 Figure 1、Figure 2 之繁體中文重製版本，內容數據已核對原文無誤。「真實世界的對照」一節每則案例的原始來源，已於內文各自標註超連結。</div>
+  <div>原始文件：OWASP GenAI Security Project《OWASP Top 10 for LLM Applications 2026》v1.0（2026-08-04）。官方資源頁：<a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener">genai.owasp.org/resource/owasp-genai-llm-top-10-2026</a>。文中圖表為原文 Figure 1、Figure 2 之繁體中文重製版本，內容數據已核對原文無誤。「真實世界的對照」「公布後迴響」兩節，每則案例／評論的原始來源，已於內文各自標註超連結；「公布後迴響」的整理範圍截至 2026-08-07。</div>
 </footer>
 
 <div class="lightbox" id="lightbox">
